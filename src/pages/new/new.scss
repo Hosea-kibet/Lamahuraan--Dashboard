@@ -32,10 +32,12 @@
 
       .right {
         flex: 2;
+        
 
         form {
           display: flex;
           flex-wrap: wrap;
+          flex-direction: column;
           gap: 30px;
           justify-content: space-around;
 
@@ -64,11 +66,12 @@
             width: 150px;
             padding: 10px;
             border: none;
-            background-color: teal;
+            background-color: #00b300;
             color: white;
             font-weight: bold;
             cursor: pointer;
             margin-top: 10px;
+            
           }
         }
       }

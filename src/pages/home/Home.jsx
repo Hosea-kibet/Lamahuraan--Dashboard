@@ -1,6 +1,7 @@
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import "./home.scss";
+import { Link } from "react-router-dom";
 
 
 import Datatable from "../../components/datatable/Datatable"
@@ -12,6 +13,12 @@ const Home = () => {
     <Sidebar/>
     <div className="listContainer">
       <Navbar/>
+      <div className="datatableTitle">
+        Add New Tune
+        <Link to="/users/new" className="link">
+          Upload
+        </Link>
+      </div>
       <Datatable/>
     </div>
   </div>

@@ -1,7 +1,7 @@
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";  
 import { Link } from "react-router-dom";
 
 
@@ -22,7 +22,7 @@ const Sidebar = () => {
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          <Link to="https://simplesms.co.ke:2121/login.xhtml" style={{ textDecoration: "none" }} target="_blank" rel="noopener noreferrer">
             <li>
               <PersonOutlineIcon className="icon" />
               <span>Simple Sms</span>
