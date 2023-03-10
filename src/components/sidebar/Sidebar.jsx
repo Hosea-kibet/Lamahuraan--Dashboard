@@ -5,6 +5,13 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
+
+const handleLogout = ()=>{
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href = "/"
+}
+
   return (
     <div className="sidebar">
       <Link to="/" style={{ textDecoration: "none" }}>
@@ -36,7 +43,7 @@ const Sidebar = () => {
 
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span onClick={handleLogout}>Logout</span>
           </li>
         </ul>
       </div>
