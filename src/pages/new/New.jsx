@@ -8,7 +8,6 @@ import { Button, Modal, Backdrop, Fade } from "@mui/material";
 import Box from "@mui/material/Box";
 import CardContent from "@mui/material/CardContent";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import Typography from "@mui/material/Typography";
 
 const New = ({ inputs, title }) => {
@@ -18,10 +17,6 @@ const New = ({ inputs, title }) => {
   const [description, setDescription] = useState("");
   const [open, setOpen] = useState(false);
   const [modalText, setModalText] = useState("");
-
-  const parsedResult = JSON.parse(modalText);
-
-  const token = localStorage.getItem("token");
 
   const styleConfirm = {
     position: "absolute",
@@ -49,7 +44,8 @@ const New = ({ inputs, title }) => {
         {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTa2l6YSB0dW5lcyIsInN1YiI6IlZBUyBQYWFTIiwiZXhwIjoxNjc4NjE1NjU0LCJuYmYiOjE2Nzg2MTIwNTQsImlhdCI6MTY3ODYxMjA1NCwianRpIjoiMTAifQ.AgVS2OnzrYE6u3LGkmVgEy8PZg-4FfR11emPro7GRKE",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
@@ -61,7 +57,7 @@ const New = ({ inputs, title }) => {
       );
       const result = await response.text();
       setOpen(true);
-      setModalText(result);
+      setModalText(result.name);
     } catch (error) {
       console.log(error);
     }
@@ -109,7 +105,7 @@ const New = ({ inputs, title }) => {
                 <input
                   type="text"
                   placeholder="Profession Name in Arabic And English,Policeman"
-                  value={name}
+                  value={name}  
                   onChange={handleNameChange}
                   required
                 />
@@ -130,41 +126,9 @@ const New = ({ inputs, title }) => {
           </div>
         </div>
       </div>
-      {/* <Modal
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout:500,
-        }}
-      >
-        <Fade in={open}>
-          <div
-            style={{
-              display:"flex",
-              justifyContent:"center",
-              alignItems:"center",
-              height:"100vh",
-            }}
-          >
-            <div
-              style={{
-                backgroundColor:"white",
-                padding:"20px",
-                borderRadius:"10px",
-              }}
-            >
-              <h2>{modalText}</h2>
-              <Button onClick={handleClose}>Close</Button>
-            </div>
+  
 
-          </div>
-        </Fade>
-      </Modal> */}
-
-      {parsedResult.error === "Failed to persist in record" ? (
-        <Modal
+      {<Modal
         open={open}
         sx={{ border: "none", boxShadow: "none" }}
         onClose={handleClose}
@@ -173,18 +137,14 @@ const New = ({ inputs, title }) => {
           <Box sx={styleConfirm}>
             <CardContent>
               <span
-                style={{
-                  float: "right",
-                  cursor: "pointer",
-                  color: "#5F6062",
-                }}
+                style={{ float: "right", cursor: "pointer", color: "#5F6062" }}
                 onClick={handleClose}
               >
                 X
               </span>
-              <ErrorOutlineIcon
+              <CheckCircleIcon
                 sx={{
-                  color: "red",
+                  color: "#00b300",
                   width: 60,
                   height: 60,
                   marginX: 16.1,
@@ -203,7 +163,7 @@ const New = ({ inputs, title }) => {
                 }}
                 component="h6"
               >
-                
+                <strong>Success!</strong>
               </Typography>
               <Typography
                 sx={{
@@ -218,20 +178,18 @@ const New = ({ inputs, title }) => {
                 color="text.secondary"
                 gutterBottom
               >
-               
-                <span style={{ color: "red" }}>Tune Already Uploaded</span>
+                {modalText} Added.
               </Typography>
               <button
                 onClick={handleClose}
                 style={{
-                  backgroundColor: "red",
+                  backgroundColor: "#00b300",
                   color: "white",
                   fontFamily: "sans-serif",
                   fontSize: "14px",
                   padding: "0.5rem 1rem",
                   borderRadius: "0.25rem",
                   width: "100%",
-                  cursor: "pointer",
                 }}
               >
                 OK
@@ -240,86 +198,7 @@ const New = ({ inputs, title }) => {
             {/* </Card> */}
           </Box>
         </div>
-      </Modal>
-      ) : (
-        <Modal
-          open={open}
-          sx={{ border: "none", boxShadow: "none" }}
-          onClose={handleClose}
-        >
-          <div>
-            <Box sx={styleConfirm}>
-              <CardContent>
-                <span
-                  style={{
-                    float: "right",
-                    cursor: "pointer",
-                    color: "#5F6062",
-                  }}
-                  onClick={handleClose}
-                >
-                  X
-                </span>
-                <CheckCircleIcon
-                  sx={{
-                    color: "#00b300",
-                    width: 60,
-                    height: 60,
-                    marginX: 16.1,
-                    marginLeft: 19,
-                  }}
-                  fontSize="inherit"
-                />
-                <Typography
-                  id="modal-modal-title"
-                  variant="h6"
-                  sx={{
-                    color: "#5F6062",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    marginTop: 1,
-                  }}
-                  component="h6"
-                >
-                  <strong>Success!</strong>
-                </Typography>
-                <Typography
-                  sx={{
-                    fontSize: 16,
-                    fontFamily: "Ubuntu",
-                    fontWeight: 500,
-                    top: 7,
-                    lineHeight: "30px",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                  }}
-                  color="text.secondary"
-                  gutterBottom
-                >
-                  You have Uploded{" "}
-                  <span style={{ color: "green" }}>{parsedResult.name}</span>
-                </Typography>
-                <button
-                  onClick={handleClose}
-                  style={{
-                    backgroundColor: "#00b300",
-                    color: "white",
-                    fontFamily: "sans-serif",
-                    fontSize: "14px",
-                    padding: "0.5rem 1rem",
-                    borderRadius: "0.25rem",
-                    width: "100%",
-                    cursor: "pointer",
-                  }}
-                >
-                  OK
-                </button>
-              </CardContent>
-              {/* </Card> */}
-            </Box>
-          </div>
-        </Modal>
-      )}
+      </Modal>}
     </div>
   );
 };

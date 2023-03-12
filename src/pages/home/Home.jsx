@@ -15,7 +15,7 @@ const Home = () => {
       <Navbar/>
       <div className="datatableTitle">
         Add New Tune
-        <Link to="/users/new" className="link">
+        <Link to="skizatunes/new" className="link">
           Upload
         </Link>
       </div>
