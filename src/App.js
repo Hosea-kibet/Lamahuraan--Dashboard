@@ -7,6 +7,9 @@ import New from "./pages/new/New";
 import { DarkModeContext } from "./context/darkModeContext";
 import Signin from "./pages/login/Login";
 import { productInputs, userInputs } from "./formSource";
+import Orders from "./pages/order/Orders";
+
+
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -24,6 +27,10 @@ function App() {
               <Route
                 path="new"
                 element={<New inputs={userInputs} title="Add Tune" />}
+              />
+               <Route
+                path="orders"
+                element={<Orders/>}
               />
             </Route>
           )}

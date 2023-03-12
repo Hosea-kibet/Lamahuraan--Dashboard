@@ -14,7 +14,7 @@ const handleLogout = ()=>{
 
   return (
     <div className="sidebar">
-      <Link to="/" style={{ textDecoration: "none" }}>
+      <Link to="/skizatunes" style={{ textDecoration: "none" }}>
         <div className="top">
           <span className="logo">lamahuraan </span>
         </div>
@@ -22,11 +22,18 @@ const handleLogout = ()=>{
       <hr />
       <div className="center">
         <ul>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/skizatunes" style={{ textDecoration: "none" }}>
             <p className="title">MAIN</p>
             <li>
               <DashboardIcon className="icon" />
-              <span>Dashboard</span>
+              <span>Our SKiza Tunes</span>
+            </li>
+          </Link>
+          <Link to="/skizatunes/orders" style={{ textDecoration: "none" }}>
+            <p className="title">CENTER</p>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Subscribed Tunes</span>
             </li>
           </Link>
           <Link
