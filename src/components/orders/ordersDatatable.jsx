@@ -82,7 +82,7 @@ export default function Datatable() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.phonenumber}</StyledTableCell>
               {/* <StyledTableCell align="right">{row.decription}</StyledTableCell> */}
-              <StyledTableCell align="center">{   moment(row.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</StyledTableCell>
+              <StyledTableCell align="center">{ moment(row.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</StyledTableCell>
               {/* <StyledTableCell align="right">{row.id}</StyledTableCell> */}
             </StyledTableRow>
           ))}
