@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from 'axios';
+import moment from 'moment';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -75,7 +76,7 @@ export default function Datatable() {
               </StyledTableCell>
               <StyledTableCell align="center">{row.name}</StyledTableCell>
               {/* <StyledTableCell align="right">{row.decription}</StyledTableCell> */}
-              <StyledTableCell align="center">{row.createdAt}</StyledTableCell>
+              <StyledTableCell align="center">{moment(row.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</StyledTableCell>
               {/* <StyledTableCell align="right">{row.id}</StyledTableCell> */}
             </StyledTableRow>
           ))}
