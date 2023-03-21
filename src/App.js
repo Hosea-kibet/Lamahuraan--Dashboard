@@ -8,6 +8,7 @@ import { DarkModeContext } from "./context/darkModeContext";
 import Signin from "./pages/login/Login";
 import { productInputs, userInputs } from "./formSource";
 import Orders from "./pages/order/Orders";
+import Otp from "./pages/otp/Otp";
 
 
 
@@ -32,6 +33,11 @@ function App() {
                 path="orders"
                 element={<Orders/>}
               />
+              <Route
+                path="otps"
+                element={<Otp/>}
+              />
+              
             </Route>
           )}
           {/* <Route path="*" element={<Login />} /> */}

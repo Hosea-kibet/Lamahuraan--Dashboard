@@ -36,6 +36,12 @@ const handleLogout = ()=>{
               <span>Subscribed Tunes</span>
             </li>
           </Link>
+          <Link to="/skizatunes/otps" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Otps</span>
+            </li>
+          </Link>
           <Link
             to="https://simplesms.co.ke:2121/login.xhtml"
             style={{ textDecoration: "none" }}
