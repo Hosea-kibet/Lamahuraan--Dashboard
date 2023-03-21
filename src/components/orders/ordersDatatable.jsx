@@ -84,7 +84,7 @@ export default function Datatable() {
                 <StyledTableCell>Tune Code</StyledTableCell>
                 <StyledTableCell align="center">PhoneNumber</StyledTableCell>
                 <StyledTableCell align="center">Time Created</StyledTableCell>
-                <StyledTableCell align="center">Status</StyledTableCell>
+                {/* <StyledTableCell align="center">Status</StyledTableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -99,7 +99,7 @@ export default function Datatable() {
                   <StyledTableCell align="center">
                     {moment(row.createdAt).format("MMMM Do, YYYY, h:mm:ss a")}
                   </StyledTableCell>
-                  <StyledTableCell
+                  {/* <StyledTableCell
                     align="center"
                     className={
                       row.status === "OD200"
@@ -114,8 +114,8 @@ export default function Datatable() {
                     {row.status === "OD200" && "Subscribed"}
                     {row.status === "OD201" && "Pending"}
                     {row.status === "OD400" && "Failed"}
-                    {/* {row.status} */}
-                  </StyledTableCell>
+                    
+                  </StyledTableCell> */}
                 </StyledTableRow>
               ))}
             </TableBody>
