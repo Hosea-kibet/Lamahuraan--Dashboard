@@ -63,7 +63,8 @@ export default function Datatable() {
           "https://skiza-app-dy3qp.ondigitalocean.app/api/v1/skiza/subscribed/list?limit=1000&page=1",
           { headers }
         );
-        setRow(response.data);
+        const sortedRows = response.data.sort((a,b)=> moment(b.createdAt)- moment(a.createdAt));
+        setRow(sortedRows);
       } catch (error) {
         console.error(error);
       }
@@ -84,7 +85,7 @@ export default function Datatable() {
                 <StyledTableCell>Tune Code</StyledTableCell>
                 <StyledTableCell align="center">PhoneNumber</StyledTableCell>
                 <StyledTableCell align="center">Time Created</StyledTableCell>
-                {/* <StyledTableCell align="center">Status</StyledTableCell> */}
+                <StyledTableCell align="center">Status</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -99,7 +100,7 @@ export default function Datatable() {
                   <StyledTableCell align="center">
                     {moment(row.createdAt).format("MMMM Do, YYYY, h:mm:ss a")}
                   </StyledTableCell>
-                  {/* <StyledTableCell
+                  <StyledTableCell
                     align="center"
                     className={
                       row.status === "OD200"
@@ -115,7 +116,7 @@ export default function Datatable() {
                     {row.status === "OD201" && "Pending"}
                     {row.status === "OD400" && "Failed"}
                     
-                  </StyledTableCell> */}
+                  </StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
