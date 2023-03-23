@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { makeStyles } from '@mui/styles';
+import Widgets from "../widgets/Widgets";
+import "./orders.scss";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,7 +56,8 @@ export default function Datatable() {
   };
 
   const [rows, setRow] = useState([]);
-  console.log(rows);
+  console.log("all the rows:", rows)
+  console.log(rows.status);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -72,11 +75,42 @@ export default function Datatable() {
     fetchOrders();
   }, []);
 
+  
+const countStatus = rows.reduce((count,row)=>{
+  if(row.status === "OD200"){
+    count.subscribed++;
+  } else if(row.status === "OD201"){
+    count.pending++;
+  } else if(row.status === "OD400"){
+    count.failed++;
+  }
+  return count;
+},{subscribed:0,pending:0,failed:0})
+
+
+
+
+
   const classes = useStyles();
 
   return (
     
     <div className="datatable">
+      <div className="widgetwrappertable">
+          
+          <Widgets
+            type="subscribed"
+            widgetProps={countStatus.subscribed}
+          />
+          <Widgets
+            type="pending"
+            widgetProps={countStatus.pending}
+          />
+          <Widgets
+            type="failed"
+            widgetProps={countStatus.failed}
+          />
+        </div>
       <div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">

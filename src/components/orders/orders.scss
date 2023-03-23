@@ -1,0 +1,17 @@
+.datatable {
+  .widgetwrappertable {
+    display: flex;
+    padding: 8px;
+    justify-content: space-evenly;
+    gap: 4;
+    margin-top: 5rem;   
+    margin-bottom: 0.625rem; 
+    display: grid;
+    
+    grid-template-columns: repeat(
+      3,
+      minmax(0, 1fr)
+    ); 
+    gap: 0.5rem; 
+  }
+}
