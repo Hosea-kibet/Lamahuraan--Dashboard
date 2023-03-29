@@ -68,6 +68,7 @@ export default function Datatable() {
         <TableHead>
           <TableRow>
             <StyledTableCell>OTP</StyledTableCell>
+            <StyledTableCell>Phone</StyledTableCell>
             <StyledTableCell align="center">order_id</StyledTableCell>
             {/* <StyledTableCell align="center">Description</StyledTableCell> */}
             <StyledTableCell align="center">Time Created</StyledTableCell>
@@ -79,6 +80,9 @@ export default function Datatable() {
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.otp}
+              </StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                {row.contact}
               </StyledTableCell>
               <StyledTableCell align="center">{row.order_id}</StyledTableCell>
               {/* <StyledTableCell align="right">{row.decription}</StyledTableCell> */}
