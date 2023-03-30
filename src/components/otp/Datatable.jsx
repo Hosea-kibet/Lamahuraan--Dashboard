@@ -33,6 +33,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const SearchBox = ({value,onChange}) => (
+  <input type="text" placeholder="Search" value={value} onChange={onChange} />
+)
+
 
 export default function Datatable() {
 
@@ -44,8 +48,8 @@ export default function Datatable() {
   };
 
   const [rows,setRow] = useState([]);
-  console.log(rows);
- 
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -60,9 +64,21 @@ export default function Datatable() {
   }, []);
 
 
+  const filteredRows = rows.filter((row) => 
+  row.otp.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  row.contact.toLowerCase().includes(searchQuery.toLowerCase()) 
+  )
+
+  const handleSearchChange = (event) =>{
+    setSearchQuery(event.target.value)
+  }
+
+
+
   return (
     <div className="datatable">
       <div>
+        <SearchBox value={searchQuery} onChange={handleSearchChange}/>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -76,7 +92,7 @@ export default function Datatable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {filteredRows.map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell component="th" scope="row">
                 {row.otp}

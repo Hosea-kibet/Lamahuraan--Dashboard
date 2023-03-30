@@ -47,6 +47,11 @@ const useStyles = makeStyles({
   },
 });
 
+
+const SearchBox = ({ value, onChange }) => (
+  <input type="text" placeholder="Search..." value={value} onChange={onChange} />
+);
+
 export default function Datatable() {
   const token = localStorage.getItem("token");
 
@@ -56,8 +61,7 @@ export default function Datatable() {
   };
 
   const [rows, setRow] = useState([]);
-  console.log("all the rows:", rows)
-  console.log(rows.status);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -75,6 +79,16 @@ export default function Datatable() {
     fetchOrders();
   }, []);
 
+  const filteredRows = rows.filter((row) =>
+    row.tune_code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.phonenumber.toLowerCase().includes(searchQuery.toLowerCase())  ||
+    row.status.toLowerCase().includes(searchQuery.toLowerCase()) 
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
   
 const countStatus = rows.reduce((count,row)=>{
   if(row.status === "OD200"){
@@ -87,11 +101,9 @@ const countStatus = rows.reduce((count,row)=>{
   return count;
 },{subscribed:0,pending:0,failed:0})
 
-
-
-
-
   const classes = useStyles();
+
+ 
 
   return (
     
@@ -111,6 +123,9 @@ const countStatus = rows.reduce((count,row)=>{
             widgetProps={countStatus.failed}
           />
         </div>
+
+        <SearchBox value={searchQuery} onChange={handleSearchChange} />
+
       <div>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -123,7 +138,7 @@ const countStatus = rows.reduce((count,row)=>{
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {filteredRows.map((row) => (
                 <StyledTableRow key={row.id}>
                   <StyledTableCell component="th" scope="row">
                     {row.tune_code}

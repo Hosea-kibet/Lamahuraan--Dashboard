@@ -33,18 +33,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const SearchBox = ({ value, onChange }) => (
+  <input type="text" placeholder="Search..." value={value} onChange={onChange} />
+);
 
 export default function Datatable() {
 
-  const [rows,setRow] = useState([]);
-  console.log(rows);
- 
+  const [rows, setRows] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get('https://skiza-app-dy3qp.ondigitalocean.app/public/skiza/list?limit=100&page=2');
-        setRow(response.data);
+        setRows(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -52,38 +54,44 @@ export default function Datatable() {
     fetchOrders();
   }, []);
 
+  const filteredRows = rows.filter((row) =>
+    row.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    row.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <div className="datatable">
-       
+      
+      <SearchBox value={searchQuery} onChange={handleSearchChange} />
+      
       <div>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Tune Code</StyledTableCell>
-            <StyledTableCell align="center">Name</StyledTableCell>
-            {/* <StyledTableCell align="center">Description</StyledTableCell> */}
-            <StyledTableCell align="center">Time Created</StyledTableCell>
-            {/* <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell> */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.code}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.name}</StyledTableCell>
-              {/* <StyledTableCell align="right">{row.decription}</StyledTableCell> */}
-              <StyledTableCell align="center">{moment(row.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</StyledTableCell>
-              {/* <StyledTableCell align="right">{row.id}</StyledTableCell> */}
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Tune Code</StyledTableCell>
+                <StyledTableCell align="center">Name</StyledTableCell>
+                <StyledTableCell align="center">Time Created</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredRows.map((row) => (
+                <StyledTableRow key={row.id}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.code}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{row.name}</StyledTableCell>
+                  <StyledTableCell align="center">{moment(row.createdAt).format('MMMM Do, YYYY, h:mm:ss a')}</StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 }
