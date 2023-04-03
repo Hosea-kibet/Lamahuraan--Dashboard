@@ -45,7 +45,7 @@ export default function Datatable() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('https://skiza-app-dy3qp.ondigitalocean.app/public/skiza/list?limit=1000&page=2');
+        const response = await axios.get('https://skiza-app-dy3qp.ondigitalocean.app/public/skiza/list?limit=1000&page=1');
         setRows(response.data);
       } catch (error) {
         console.error(error);
