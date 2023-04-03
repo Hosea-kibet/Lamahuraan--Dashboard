@@ -45,7 +45,7 @@ const New = ({ inputs, title }) => {
           method: "POST",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTa2l6YSB0dW5lcyIsInN1YiI6IlZBUyBQYWFTIiwiZXhwIjoxNjc4NjE1NjU0LCJuYmYiOjE2Nzg2MTIwNTQsImlhdCI6MTY3ODYxMjA1NCwianRpIjoiMTAifQ.AgVS2OnzrYE6u3LGkmVgEy8PZg-4FfR11emPro7GRKE",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTa2l6YSB0dW5lcyIsInN1YiI6IlZBUyBQYWFTIiwiZXhwIjoxNjgwNTI2MzI2LCJuYmYiOjE2ODA1MjI3MjYsImlhdCI6MTY4MDUyMjcyNiwianRpIjoiMTEifQ.Pz6snR-wYtv6HfxUk8cMe0y_Ho5dt0Aq6j3wPiKZwD8",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
