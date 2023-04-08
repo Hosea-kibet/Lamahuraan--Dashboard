@@ -18,6 +18,9 @@ const New = ({ inputs, title }) => {
   const [open, setOpen] = useState(false);
   const [modalText, setModalText] = useState("");
 
+  const token = localStorage.getItem("token");
+  
+
   const styleConfirm = {
     position: "absolute",
     top: "50%",
@@ -45,7 +48,7 @@ const New = ({ inputs, title }) => {
           method: "POST",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJTa2l6YSB0dW5lcyIsInN1YiI6IlZBUyBQYWFTIiwiZXhwIjoxNjgwNTI2MzI2LCJuYmYiOjE2ODA1MjI3MjYsImlhdCI6MTY4MDUyMjcyNiwianRpIjoiMTEifQ.Pz6snR-wYtv6HfxUk8cMe0y_Ho5dt0Aq6j3wPiKZwD8",
+              `Bearer ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
