@@ -9,6 +9,7 @@ import Signin from "./pages/login/Login";
 import { productInputs, userInputs } from "./formSource";
 import Orders from "./pages/order/Orders";
 import Otp from "./pages/otp/Otp";
+import Direct from "./pages/Direct/Direct";
 
 
 
@@ -36,6 +37,10 @@ function App() {
               <Route
                 path="otps"
                 element={<Otp/>}
+              />
+              <Route
+                path="lama"
+                element={<Direct/>}
               />
               
             </Route>
