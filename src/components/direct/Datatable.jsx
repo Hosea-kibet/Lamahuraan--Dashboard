@@ -66,7 +66,7 @@ const Datatable = () => {
   React.useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/public/skiza/direct/subscribed/list?page=1&limit=5000');
+        const response = await axios.get('https://skiza-app-dy3qp.ondigitalocean.app/public/skiza/direct/subscribed/list?page=1&limit=5000');
         if (Array.isArray(response.data)) {
           setRow(response.data);
         } else {
